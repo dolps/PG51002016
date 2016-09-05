@@ -1,12 +1,16 @@
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 
 /**
  * Created by dolplads on 04/09/16.
  */
 public class Comment {
-    List<Comment> commentsOnComment;
+    @Id @GeneratedValue
+    private Long id;
+    private List<Comment> commentsOnComment;
     private int upVotesCount;
     private int downVotesCount;
 
