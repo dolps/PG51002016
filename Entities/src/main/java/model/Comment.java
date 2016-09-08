@@ -1,15 +1,20 @@
 package model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
  * Created by dolplads on 04/09/16.
  */
+@Entity
 public class Comment {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
+    @OneToMany
     private List<Comment> commentsOnComment;
     private int upVotesCount;
     private int downVotesCount;
@@ -18,6 +23,9 @@ public class Comment {
         this.commentsOnComment = commentsOnComment;
         this.upVotesCount = upVotesCount;
         this.downVotesCount = downVotesCount;
+    }
+
+    public Comment() {
     }
 
     public List<Comment> getCommentsOnComment() {
