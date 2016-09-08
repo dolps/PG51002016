@@ -2,6 +2,7 @@ package service;
 
 import com.sun.media.jfxmedia.logging.Logger;
 import model.Address;
+import model.Post;
 import model.User;
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -55,22 +57,66 @@ public class UserEJBTest {
 
     @Test
     public void numberOfUsers() throws Exception {
+        List<User> users = sampleUsers();
+
+        userEJB.startTransaction();
+        persistUsers(users);
+        userEJB.commitTransaction();
+
+        assertEquals(3, userEJB.numberOfUsers());
 
     }
 
     @Test
     public void numberOfUsersByCountry() throws Exception {
+        List<User> users = sampleUsers();
 
+        userEJB.startTransaction();
+        persistUsers(users);
+        userEJB.commitTransaction();
+
+        assertEquals(2, userEJB.numberOfUsersByCountry("norway"));
     }
 
     @Test
     public void mostActiveBasedOnPosts() throws Exception {
+        List<User> users = sampleUsers();
+        Post post = new Post(users.get(0), "sample", new Date());
+        Post post1 = new Post(users.get(0), "sample", new Date());
+        users.get(0).addPost(post);
+        users.get(0).addPost(post1);
+
+        userEJB.startTransaction();
+        persistUsers(users);
+        PostEJB ejb = new PostEJB(userEJB.entityManager);
+        ejb.save(post);
+        ejb.save(post1);
+        userEJB.commitTransaction();
+
+        List<User> result = userEJB.mostActiveBasedOnPosts(3);
+
+        assertEquals("most active = ", "thomas", result.get(0).getName());
 
     }
 
     @Test
     public void mostActiveBasedOnComments() throws Exception {
+        List<User> users = sampleUsers();
+        Post post = new Post(users.get(0), "samples", new Date());
+        Post post1 = new Post(users.get(0), "samples", new Date());
+        users.get(0).addPost(post);
+        users.get(0).addPost(post1);
 
+        userEJB.startTransaction();
+        persistUsers(users);
+        PostEJB ejb = new PostEJB(userEJB.entityManager);
+        ejb.save(post);
+        ejb.save(post1);
+        userEJB.commitTransaction();
+
+        List<User> result = userEJB.mostActiveBasedOnComments(2);
+
+        assertEquals("most active = ", "thomas", result.get(0).getName());
     }
 
     @Test

@@ -14,13 +14,13 @@ import java.util.Set;
  * Created by dolplads on 07/09/16.
  */
 @Stateless
-public class UserEJB implements UserRepository {
+public class UserEJB extends TransactionAble implements UserRepository {
     //@PersistenceContext(unitName = "H2DB")
-    private EntityManager entityManager;
+    //private EntityManager entityManager;
 
 
     public UserEJB(EntityManager entityManager) {
-        this.entityManager = entityManager;
+        super(entityManager);
     }
 
     @Override
@@ -30,22 +30,35 @@ public class UserEJB implements UserRepository {
 
     @Override
     public int numberOfUsers() {
-        return 0;
+        Long result = (Long) entityManager.createNamedQuery(User.GET_NUMBER_OF_USERS).getSingleResult();
+        return Math.toIntExact(result);
     }
 
     @Override
     public int numberOfUsersByCountry(String countryName) {
-        return 0;
+        Long result = (Long) entityManager
+                .createNamedQuery(User.GET_NUMBER_OF_USERS_FROM_COUNTRY)
+                .setParameter("cName", countryName).getSingleResult();
+
+        return Math.toIntExact(result);
     }
 
     @Override
     public List<User> mostActiveBasedOnPosts(int limit) {
-        return null;
+        @SuppressWarnings(value = "unchecked")
+        List<User> users = entityManager
+                .createNamedQuery(User.MOST_ACTIVE_POSTER)
+                .setMaxResults(limit).getResultList();
+        return users;
     }
 
     @Override
     public List<User> mostActiveBasedOnComments(int limit) {
-        return null;
+        @SuppressWarnings(value = "unchecked")
+        List<User> users = entityManager
+                .createNamedQuery(User.MOST_ACTIVE_COMMENTER)
+                .setMaxResults(limit).getResultList();
+        return users;
     }
 
     @Override
@@ -66,36 +79,5 @@ public class UserEJB implements UserRepository {
     @Override
     public void delete(User entity) {
         entityManager.remove(entityManager.merge(entity));
-    }
-
-    /**
-     * can be used to retrieve the Transaction object
-     * too handle storing of multiple objects
-     *
-     * @return
-     */
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    public EntityTransaction getTransaction() {
-        if (entityManager != null) {
-            return entityManager.getTransaction();
-        }
-        throw new NullPointerException("entityManager is null");
-    }
-
-    public void commitTransaction() {
-        EntityTransaction transaction = getTransaction();
-        transaction.commit();
-    }
-
-    public void startTransaction() {
-        EntityTransaction transaction = getTransaction();
-        transaction.begin();
     }
 }

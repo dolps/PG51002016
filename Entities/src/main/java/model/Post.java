@@ -12,22 +12,24 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "nOfPosts", query = "SELECT count(post) FROM Post post"),
-        @NamedQuery(name = "nOfPostsByCountry", query = "select count(post)from Post post where post.user.address.countryName = :cName"),
+        @NamedQuery(name = Post.NUMBER_OF_POSTS, query = "SELECT count(post) FROM Post post"),
+        @NamedQuery(name = Post.NUMBER_OF_POSTS_BY_COUNTRY, query = "select count(post)from Post post where post.user.address.countryName = :cName"),
 })
 public class Post {
+    public static final String NUMBER_OF_POSTS_BY_COUNTRY = "NUMBER OF POSTS BY COUNTRY";
+    public static final String NUMBER_OF_POSTS = "NUMBER OF POSTS TOTAL";
     @Id
     @GeneratedValue
     private Long id;
 
     @ManyToOne
     private User user;
+    @OneToMany
+    private List<Comment> userComments;
     private String displayText;
     private Date creationDate;
     private int upVotesCount;
     private int downVotesCount;
-    @OneToMany
-    private List<Comment> userComments;
 
     public Post(User user, String displayText, Date creationDate) {
         this.user = user;
@@ -95,5 +97,27 @@ public class Post {
 
     public void setDisplayText(String displayText) {
         this.displayText = displayText;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", user=" + user +
+                ", displayText='" + displayText + '\'' +
+                ", creationDate=" + creationDate +
+                ", upVotesCount=" + upVotesCount +
+                ", downVotesCount=" + downVotesCount +
+                ", userComments=" + userComments +
+                '}';
+    }
+
+    /**
+     * Adds a comment to this post
+     *
+     * @param comment
+     */
+    public void addComment(Comment comment) {
+        this.userComments.add(comment);
     }
 }

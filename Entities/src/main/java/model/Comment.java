@@ -1,5 +1,8 @@
 package model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,45 +13,15 @@ import java.util.List;
  * Created by dolplads on 04/09/16.
  */
 @Entity
+@Data
+@NoArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany
-    private List<Comment> commentsOnComment;
-    private int upVotesCount;
-    private int downVotesCount;
+    private String comment;
 
-    public Comment(List<Comment> commentsOnComment, int upVotesCount, int downVotesCount) {
-        this.commentsOnComment = commentsOnComment;
-        this.upVotesCount = upVotesCount;
-        this.downVotesCount = downVotesCount;
-    }
-
-    public Comment() {
-    }
-
-    public List<Comment> getCommentsOnComment() {
-        return commentsOnComment;
-    }
-
-    public void setCommentsOnComment(List<Comment> commentsOnComment) {
-        this.commentsOnComment = commentsOnComment;
-    }
-
-    public int getUpVotesCount() {
-        return upVotesCount;
-    }
-
-    public void setUpVotesCount(int upVotesCount) {
-        this.upVotesCount = upVotesCount;
-    }
-
-    public int getDownVotesCount() {
-        return downVotesCount;
-    }
-
-    public void setDownVotesCount(int downVotesCount) {
-        this.downVotesCount = downVotesCount;
+    public Comment(String comment) {
+        this.comment = comment;
     }
 }
