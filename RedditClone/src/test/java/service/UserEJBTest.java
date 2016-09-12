@@ -39,6 +39,21 @@ public class UserEJBTest {
     }
 
     @Test
+    public void createPost() throws Exception {
+        fail("not implemented");
+    }
+
+    @Test
+    public void createCommentForPost() throws Exception {
+        fail("not implemented");
+    }
+
+    @Test
+    public void update() throws Exception {
+        fail("not implemented");
+    }
+
+    @Test
     public void getCountriesUsersRepresent() throws Exception {
         List<User> users = sampleUsers();
 

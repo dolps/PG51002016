@@ -1,5 +1,7 @@
 package repository;
 
+import model.Comment;
+import model.Post;
 import model.User;
 
 import java.util.List;
@@ -9,6 +11,21 @@ import java.util.Set;
  * Created by dolplads on 07/09/16.
  */
 public interface UserRepository extends CRUDrepository<User> {
+
+    /**
+     * Create a new post from a given user
+     *
+     * @return
+     */
+    void createPost(Post post);
+
+    /**
+     * Create a comment for a given post
+     *
+     * @return
+     */
+    void createCommentForPost(Comment comment);
+
 
     Set<String> getCountriesUsersRepresent();
 

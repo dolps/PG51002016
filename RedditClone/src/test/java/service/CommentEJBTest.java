@@ -61,7 +61,7 @@ public class CommentEJBTest {
         User testUser2 = new User("thomas", "dolplad", address, "dolplads@gmail.com");
         Post post = new Post(testUser, "displayText", new Date());
         String text = "this is a comment";
-        Comment comment = new Comment(text);
+        Comment comment = new Comment(testUser, post, text);
         post.addComment(comment);
         testUser.addPost(post);
 

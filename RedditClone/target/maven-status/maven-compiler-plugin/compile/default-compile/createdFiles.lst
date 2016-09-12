@@ -4,7 +4,6 @@ model/Comment.class
 service/CommentEJB.class
 model/Post.class
 model/Address.class
-Main.class
 service/UserEJB.class
 repository/CRUDrepository.class
 model/User.class

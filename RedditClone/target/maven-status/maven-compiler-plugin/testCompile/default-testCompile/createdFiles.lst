@@ -1,3 +1,4 @@
-model/UserTest.class
 service/CommentEJBTest.class
+service/UserEJBTest.class
+model/UserTest.class
 service/PostEJBTest.class

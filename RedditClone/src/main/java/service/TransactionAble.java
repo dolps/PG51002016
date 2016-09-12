@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @NoArgsConstructor
-public class TransactionAble {
+public abstract class TransactionAble {
 
     private EntityManager entityManager;
 

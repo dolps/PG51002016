@@ -3,10 +3,9 @@ package model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +19,22 @@ public class Comment {
     @Id
     @GeneratedValue
     private Long id;
+    @Size(max = 200)
     private String comment;
+    @ManyToOne
+    @NotNull
+    private User user;
+
+    @NotNull(message = "Cannot be null")
+    @ManyToOne
+    private Post post;
 
     @OneToMany
     private List<Comment> comments;
 
-    public Comment(String comment) {
+    public Comment(User user, Post post, String comment) {
+        this.user = user;
+        this.post = post;
         this.comment = comment;
         this.comments = new ArrayList<>();
     }

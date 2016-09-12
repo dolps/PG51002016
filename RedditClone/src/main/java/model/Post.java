@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,12 +31,14 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
+    @NotNull
     @ManyToOne
     private User user;
     @OneToMany
     private List<Comment> userComments;
+    @Size(max = 200)
     private String displayText;
+    @Past
     @Temporal(TemporalType.DATE)
     private Date creationDate;
     private int upVotesCount;

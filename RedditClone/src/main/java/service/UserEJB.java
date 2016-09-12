@@ -1,7 +1,10 @@
 package service;
 
+import model.Comment;
+import model.Post;
 import model.User;
 import repository.UserRepository;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -23,6 +26,19 @@ public class UserEJB extends TransactionAble implements UserRepository {
         this.entityManager = entityManager;
     }
 
+
+
+    @Override
+    public void createPost(Post post) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void createCommentForPost(Comment comment) {
+        throw new NotImplementedException();
+    }
+
+
     @Override
     public Set<String> getCountriesUsersRepresent() {
         return null;
@@ -42,6 +58,7 @@ public class UserEJB extends TransactionAble implements UserRepository {
 
         return Math.toIntExact(result);
     }
+
 
     @Override
     public List<User> mostActiveBasedOnPosts(int limit) {
