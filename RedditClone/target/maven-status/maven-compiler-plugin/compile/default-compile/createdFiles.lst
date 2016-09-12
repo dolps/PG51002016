@@ -1,0 +1,14 @@
+repository/UserRepository.class
+repository/PostRepository.class
+model/Comment.class
+service/CommentEJB.class
+model/Post.class
+model/Address.class
+Main.class
+service/UserEJB.class
+repository/CRUDrepository.class
+model/User.class
+endpoints/UserEndpoint.class
+service/TransactionAble.class
+repository/CommentRepository.class
+service/PostEJB.class

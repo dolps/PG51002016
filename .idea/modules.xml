@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Entities/Entities.iml" filepath="$PROJECT_DIR$/Entities/Entities.iml" />
       <module fileurl="file://$PROJECT_DIR$/PG5100.iml" filepath="$PROJECT_DIR$/PG5100.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RedditClone/Entities.iml" filepath="$PROJECT_DIR$/RedditClone/Entities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RelationShip/RelationShip.iml" filepath="$PROJECT_DIR$/RelationShip/RelationShip.iml" />
     </modules>
   </component>
 </project>

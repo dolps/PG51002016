@@ -1,0 +1,3 @@
+model/UserTest.class
+service/CommentEJBTest.class
+service/PostEJBTest.class

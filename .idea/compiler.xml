@@ -23,11 +23,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Entities" />
+        <module name="RelationShip" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Entities" target="1.8" />
       <module name="PG5100" target="1.8" />
+      <module name="RelationShip" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
